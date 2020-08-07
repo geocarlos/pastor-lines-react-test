@@ -3,7 +3,7 @@ import './Main.scss';
 import { Modal, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-const CustomModal = ({ buttonLabels, _key }) => {
+const CustomModal = ({ _key }) => {
 	const history = useHistory();
 	const handleClose = () => {
 		history.push('/');
@@ -23,8 +23,8 @@ const CustomModal = ({ buttonLabels, _key }) => {
 				Contacts will be listed here.
        			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="primary">{buttonLabels.a}</Button>
-				<Button variant="primary">{buttonLabels.b}</Button>
+				<Button onClick={() => history.push('/modal-a')} variant="primary">All Contacts</Button>
+				<Button onClick={() => history.push('/modal-b')} variant="primary">US Contacts</Button>
 				<Button variant="secondary" onClick={handleClose}>Close</Button>
 			</Modal.Footer>
 		</Modal>

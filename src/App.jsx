@@ -5,10 +5,6 @@ import Modal from './containers/CustomModal';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Switch from 'react-bootstrap/esm/Switch';
 
-const buttonLabels = {
-	a: 'All Contacts', b: 'US Contacts'
-}
-
 function App() {
 	return (
 		<div className="container app">
@@ -18,10 +14,10 @@ function App() {
 						<Main />
 					</Route>
 					<Route path="/modal-a">
-						<Modal {...{ show: true, _key: 'a', buttonLabels }} />
+						<Modal {...{ show: true, _key: 'a' }} />
 					</Route>
 					<Route path="/modal-b">
-						<Modal {...{ show: true, _key: 'b', buttonLabels }} />
+						<Modal {...{ show: true, _key: 'b' }} />
 					</Route>
 				</Switch>
 			</Router>
