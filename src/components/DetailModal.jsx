@@ -1,11 +1,11 @@
 import React from 'react';
-import './Main.scss';
 import { Modal, Button } from 'react-bootstrap';
 
-const DetailModal = ({ setShow, show, details }) => {
+const DetailModal = ({ setSelected, show, details}) => {
 	const handleClose = () => {
-		setShow(false);
+		setSelected(null);
 	}
+	console.log(details)
 	return (
 		<Modal
 			show={show}
@@ -18,7 +18,11 @@ const DetailModal = ({ setShow, show, details }) => {
 				<Modal.Title>Modal C</Modal.Title>
 			</Modal.Header>
 				<Modal.Body>
-					{JSON.stringify(details, null, 2)}
+					<p><b>Full name: </b>{`${details.first_name} ${details.last_name}`}</p>
+					<p><b>E-mail: </b>{details.email}</p>
+					<p><b>Phone number: </b>{details.phone_number}</p>
+					<p><b>Country: </b>{details.country.iso}</p>
+					<p><b>Groups: </b>{details.groups.map(g => g.group_name).join(', ')}</p>
        			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={handleClose}>Close</Button>
