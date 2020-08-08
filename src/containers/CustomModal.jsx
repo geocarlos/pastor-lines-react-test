@@ -99,9 +99,9 @@ const CustomModal = ({ _key }) => {
 					</Scrollbars>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => history.push('/modal-a')} variant="primary">All Contacts</Button>
-					<Button onClick={() => history.push('/modal-b')} variant="primary">US Contacts</Button>
-					<Button variant="secondary" onClick={handleClose}>Close</Button>
+					<Button onClick={() => history.push('/modal-a')} variant="color-a">All Contacts</Button>
+					<Button onClick={() => history.push('/modal-b')} variant="color-b">US Contacts</Button>
+					<Button variant="outline-color-a" onClick={handleClose}>Close</Button>
 				</Modal.Footer>
 			</Modal>
 			{selected && <DetailModal show={selected !== null} setSelected={setSelected} details={selected} />}

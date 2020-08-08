@@ -7,8 +7,8 @@ const Main = () => {
 	const history = useHistory();
 	return (
 		<div className="button-container">
-			<Button onClick={() => history.push('/modal-a')}>Button A</Button>
-			<Button onClick={() => history.push('/modal-b')}>Button B</Button>
+			<Button onClick={() => history.push('/modal-a')} variant="color-a">Button A</Button>
+			<Button onClick={() => history.push('/modal-b')} variant="color-b">Button B</Button>
 		</div>
 	)
 }
