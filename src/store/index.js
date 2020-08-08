@@ -5,6 +5,8 @@ import thunk from "redux-thunk";
 
 import reducer from "../reducers";
 
-const store = createStore(reducer, applyMiddleware(thunk, promiseMiddleware));
+const createWithMiddleware = applyMiddleware(promiseMiddleware, thunk)(createStore);
+
+const store = createWithMiddleware(reducer);
 
 export default store;

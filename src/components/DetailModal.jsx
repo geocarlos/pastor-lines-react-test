@@ -17,8 +17,8 @@ const DetailModal = ({ setShow, show, details }) => {
 			<Modal.Header closeButton>
 				<Modal.Title>Modal C</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>
-				{JSON.stringify(details, null, 2)}
+				<Modal.Body>
+					{JSON.stringify(details, null, 2)}
        			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={handleClose}>Close</Button>

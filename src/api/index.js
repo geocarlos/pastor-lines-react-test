@@ -3,12 +3,11 @@ import {
 	token
 } from './token.json';
 
-const url = 'https://api.dev.pastorsline.com/api/contacts.json';
+const url = 'https://api.dev.pastorsline.com/api/contacts.json?&companyId=171';
 
 const api = {
-	fetchDeviceFields: function () {
-		const request = axios.get(url);
-		return request;
+	fetchContacts: function (params = []) {
+		return axios.get(url + '&' + params.join('&'));
 	},
 }
 

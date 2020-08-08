@@ -1,12 +1,11 @@
+import { handleAsync } from './asyncHandler';
 import api from '../api';
 
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
-const fetchContacts = () => ({
-	type: FETCH_CONTACTS,
-	contacts: api.fetchContacts()
-})
+const fetchContacts = (params) => dispatch => {
+	handleAsync(dispatch, FETCH_CONTACTS, api.fetchContacts, params);
+};
 
-export const actions = {
+export {
 	fetchContacts
 }
-

@@ -24,7 +24,7 @@ const contacts = (state = initialState, action) => {
 		case FETCH_CONTACTS + status.FULFILLED:
 			return {
 				...state,
-				contacts: action.contacts,
+				contacts: action.payload.data.contacts,
 				loading: false
 		}
 		default:
