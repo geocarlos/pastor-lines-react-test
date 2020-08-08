@@ -1,0 +1,14 @@
+.modal-body {
+	height: 65vh;
+	overflow-y: auto;
+}
+
+.loading {
+	background: transparent;
+	display: flex;
+	height: 75%;
+	width: 100%;
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}

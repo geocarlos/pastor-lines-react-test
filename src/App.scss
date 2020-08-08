@@ -1,0 +1,15 @@
+$background-color: #fafafa;
+$base-color: #333;
+
+body {
+	color: $base-color;
+	background-color: $background-color;
+}
+
+.app {
+	display: flex;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+}
