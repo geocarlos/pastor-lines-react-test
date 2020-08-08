@@ -3,7 +3,7 @@ import {
 	token
 } from './token.json';
 
-const url = 'https://api.dev.pastorsline.com/api/contacts.json?&companyId=171';
+const url = 'https://api.dev.pastorsline.com/api/contacts.json?companyId=171';
 
 const api = {
 	fetchContacts: function (params = []) {

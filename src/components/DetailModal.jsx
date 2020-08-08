@@ -18,6 +18,7 @@ const DetailModal = ({ setSelected, show, details}) => {
 				<Modal.Title>Modal C</Modal.Title>
 			</Modal.Header>
 				<Modal.Body>
+					<p><b>Contact ID: </b>{details.id}</p>
 					<p><b>Full name: </b>{`${details.first_name} ${details.last_name}`}</p>
 					<p><b>E-mail: </b>{details.email}</p>
 					<p><b>Phone number: </b>{details.phone_number}</p>

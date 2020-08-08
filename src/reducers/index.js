@@ -1,5 +1,5 @@
 import {
-	FETCH_CONTACTS
+	FETCH_CONTACTS, QUERY_CONTACTS
 } from '../actions';
 
 const status = {
@@ -20,7 +20,8 @@ const contacts = (state = initialState, action) => {
 		case FETCH_CONTACTS + status.PENDING:
 			return {
 			...state,
-			loading: true
+			loading: true,
+			hasError: false
 		}
 		case FETCH_CONTACTS + status.FULFILLED:
 			const contacts = action.payload.data.contacts;
@@ -28,7 +29,37 @@ const contacts = (state = initialState, action) => {
 				...state,
 				total: action.payload.data.total,
 				contacts: state.contacts.concat(Object.keys(contacts).map(c => contacts[c])),
+				loading: false,
+				hasError: false
+		}
+		case FETCH_CONTACTS + status.REJECTED:
+			return {
+			...state,
+			loading: false,
+			hasError: true
+		}
+		case QUERY_CONTACTS + status.PENDING:
+			console.log('querying pending')
+			return {
+			...state,
+			loading: true
+		}
+		case QUERY_CONTACTS + status.FULFILLED:
+			console.log('querying fulfilled')
+			const filteredContacts = action.payload.data.contacts;
+			return {
+				...state,
+				total: action.payload.data.total,
+				contacts: Object.keys(filteredContacts).map(c => filteredContacts[c]),
 				loading: false
+		}
+		case QUERY_CONTACTS + status.REJECTED:
+			console.log('querying error');
+			console.log(action.payload)
+			return {
+			...state,
+			loading: false,
+			hasError: true
 		}
 		default:
 			return state;
