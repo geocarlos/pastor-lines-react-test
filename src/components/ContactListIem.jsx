@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Spinner } from 'react-bootstrap';
 
-const ContactListItem = ({ contact }) => {
+const ContactListItem = ({ contact, onClick }) => {
 	return (
-		<Card key={(contact || {}).id || 'loading-conc'}>
+		<Card key={(contact || {}).id || 'loading-conc'} onClick={onClick}>
 			<Card.Body>
 				{contact ? (
 					<p><b>{contact.id}</b> - {contact.first_name} {contact.last_name}{contact.email && `, ${contact.email}`}</p>
