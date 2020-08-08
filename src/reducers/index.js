@@ -9,7 +9,8 @@ const status = {
 }
 
 const initialState = {
-	contacts: {},
+	contacts: [],
+	total: 0,
 	loading: false,
 	hasError: false
 }
@@ -22,9 +23,11 @@ const contacts = (state = initialState, action) => {
 			loading: true
 		}
 		case FETCH_CONTACTS + status.FULFILLED:
+			const contacts = action.payload.data.contacts;
 			return {
 				...state,
-				contacts: action.payload.data.contacts,
+				total: action.payload.data.total,
+				contacts: state.contacts.concat(Object.keys(contacts).map(c => contacts[c])),
 				loading: false
 		}
 		default:

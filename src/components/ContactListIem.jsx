@@ -1,11 +1,15 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Spinner } from 'react-bootstrap';
 
-const ContactListItem = ({contact}) => {
+const ContactListItem = ({ contact }) => {
 	return (
-		<Card key={contact.id}>
+		<Card key={(contact || {}).id || 'loading-conc'}>
 			<Card.Body>
-				<p><b>{contact.id}</b> - {contact.first_name} {contact.last_name}{contact.email && `, ${contact.email}`}</p>
+				{contact ? (
+					<p><b>{contact.id}</b> - {contact.first_name} {contact.last_name}{contact.email && `, ${contact.email}`}</p>
+				) : (
+					<div className="loading"><Spinner animation="border" /></div>
+				)}
 			</Card.Body>
 		</Card>
 	)
