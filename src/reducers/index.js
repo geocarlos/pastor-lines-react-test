@@ -39,13 +39,11 @@ const contacts = (state = initialState, action) => {
 			hasError: true
 		}
 		case QUERY_CONTACTS + status.PENDING:
-			console.log('querying pending')
 			return {
 			...state,
 			loading: true
 		}
 		case QUERY_CONTACTS + status.FULFILLED:
-			console.log('querying fulfilled')
 			const filteredContacts = action.payload.data.contacts;
 			return {
 				...state,
@@ -54,8 +52,6 @@ const contacts = (state = initialState, action) => {
 				loading: false
 		}
 		case QUERY_CONTACTS + status.REJECTED:
-			console.log('querying error');
-			console.log(action.payload)
 			return {
 			...state,
 			loading: false,
