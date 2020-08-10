@@ -20,17 +20,31 @@ const CustomModal = ({ _key }) => {
 	// local state
 	const [page, setPage] = useState(1);
 	const [selected, setSelected] = useState(null);
+	const [_contacts, setContacts] = useState([]);
 	const [query, setQuery] = useState('');
+	const [onlyEven, setOnlyEven] = useState(false);
 
 	useEffect(() => {
-		if (contacts.length === 0) {
-			const params = [`page=${page}`];
-			if (_key === 'b') {
-				params.push('countryId=226'); // Currently not working
-			}
-			fetchContacts([`page=${page}`])(dispatch);
+		setContacts([]);
+		const params = ['page=1'];
+		if (_key === 'b') {
+			params.push('countryId=226'); // Currently not working
 		}
-	}, [dispatch, page, contacts, _key])
+		queryContacts(params)(dispatch);
+	}, [dispatch, _key]);
+
+	useEffect(() => {	
+		setContacts(contacts);
+	}, [contacts, setContacts]);
+
+	const filterContacts = (list) => {
+		// Technical debt: &countryId=xxx does not appear to be working, thus a work-around
+		const _list = _key === 'a' ? list : list.filter(c => c.country_id === 226);
+		if (onlyEven) {
+			return _list.filter(c => c.id % 2 === 0);
+		}
+		return _list;
+	}
 
 	const handleClose = () => {
 		history.push('/');
@@ -39,11 +53,14 @@ const CustomModal = ({ _key }) => {
 	const handleScroll = event => {
 		const el = event.srcElement;
 		const reachedBottom = Math.round(el.scrollTop) === el.scrollHeight - el.clientHeight;
-		if (reachedBottom && !loading && Object.keys(contacts).length < total && !query) {
+		if (reachedBottom && !loading && Object.keys(contacts).length < total) {
 			setPage(page + 1);
 			const params = [`page=${page + 1}`];
 			if (_key === 'b') {
 				params.push('countryId=226');
+			}
+			if (query) {
+				params.push(`query=${query}`);
 			}
 			fetchContacts(params)(dispatch);
 		}
@@ -70,9 +87,6 @@ const CustomModal = ({ _key }) => {
 		queryContacts(params)(dispatch);
 	}
 
-	// Technical debt: &countryId=xxx does not appear to be working, thus a work-around
-	const _contacts = _key === 'a' ? contacts : contacts.filter(c => c.country_id === 226);
-
 	return (
 		<>
 			<Modal
@@ -89,7 +103,7 @@ const CustomModal = ({ _key }) => {
 				</Modal.Header>
 				<Modal.Body>
 					<Scrollbars onScroll={handleScroll}>
-						{_contacts.map(contact => (
+						{filterContacts(_contacts).map(contact => (
 							<Fragment key={contact.id}>
 								<ContactListItem onClick={() => setSelected(contact)} contact={contact} />
 							</Fragment>
@@ -99,6 +113,10 @@ const CustomModal = ({ _key }) => {
 					</Scrollbars>
 				</Modal.Body>
 				<Modal.Footer>
+					<div className="checkbox-container">
+						<input type="checkbox" className="checkbox" checked={onlyEven} onChange={() => setOnlyEven(!onlyEven)} />
+						<label>Only even</label>
+					</div>
 					<Button onClick={() => history.push('/modal-a')} variant="color-a">All Contacts</Button>
 					<Button onClick={() => history.push('/modal-b')} variant="color-b">US Contacts</Button>
 					<Button variant="outline-color-a" onClick={handleClose}>Close</Button>

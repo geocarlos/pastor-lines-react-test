@@ -18,6 +18,7 @@ const initialState = {
 const contacts = (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_CONTACTS + status.PENDING:
+		case QUERY_CONTACTS + status.PENDING:
 			return {
 			...state,
 			loading: true,
@@ -33,15 +34,11 @@ const contacts = (state = initialState, action) => {
 				hasError: false
 		}
 		case FETCH_CONTACTS + status.REJECTED:
+		case QUERY_CONTACTS + status.REJECTED:
 			return {
 			...state,
 			loading: false,
 			hasError: true
-		}
-		case QUERY_CONTACTS + status.PENDING:
-			return {
-			...state,
-			loading: true
 		}
 		case QUERY_CONTACTS + status.FULFILLED:
 			const filteredContacts = action.payload.data.contacts;
@@ -50,12 +47,6 @@ const contacts = (state = initialState, action) => {
 				total: action.payload.data.total,
 				contacts: Object.keys(filteredContacts).map(c => filteredContacts[c]),
 				loading: false
-		}
-		case QUERY_CONTACTS + status.REJECTED:
-			return {
-			...state,
-			loading: false,
-			hasError: true
 		}
 		default:
 			return state;
