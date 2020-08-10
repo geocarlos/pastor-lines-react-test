@@ -5,7 +5,7 @@ const DetailModal = ({ setSelected, show, details}) => {
 	const handleClose = () => {
 		setSelected(null);
 	}
-	console.log(details)
+	
 	return (
 		<Modal
 			show={show}
